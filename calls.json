@@ -1,0 +1,62 @@
+[
+{
+	"id": 0,
+	"call": "Traveling Violation",
+	"description": "A travel is called when an offensive player walks with the basketball. A movement is considered a walk if the ball carrier moves two footsteps without dribbling generally, though a second step is allowed, and a third prohibited, if the player is driving to the basket for a layup.",
+	"gif": "/static/GIFs/Travel.gif"
+},
+{
+	"id": 1,
+	"call": "Double Dribbling Violation",
+	"description": "A double dribble is called if a player stops dribbling (i.e., picks up their dribble) and then, after any amount of time, puts the ball back on the floor in a non-passing motion.",
+	"gif": "/static/GIFs/DoubleDribble.gif"
+},
+{
+	"id": 2,
+	"call": "Carrying Violation",
+	"description": "A carrying violation is called if the player allows the ball to come to rest in one or both of their hands, and then continues their dribble. It is like a double dribble but less obvious, since a carry can be called if the player dribbles in such a way that gravity does not assist their movement. An easier way to spot it is if a player does not have their palm facing the floor during the dribble motion.",
+	"gif": "/static/GIFs/Carry.gif"
+},
+{
+	"id": 3,
+	"call": "Intentional Foul",
+	"description": "An intentional foul should be called when the defensive player makes a play to stop the offensive player’s advantageous position, or goes for the player instead of the basketball.",
+	"gif": "/static/GIFs/IntentionalFoul.gif"
+},
+{
+	"id": 4,
+	"call": "Technical Foul",
+	"description": "Technical fouls are called when a player or coach acts in an unsportsmanlike manner, but not for physical contact. A person berating the official or engaging in unacceptable talk with an opposing member should be called for a technical foul, and two shots and possession of the ball will be rewarded to the other team. A player/players coming off the bench during gameplay should also merit a technical foul.",
+	"gif": "/static/GIFs/TechnicalFoul.gif"
+},
+{
+	"id": 5,
+	"call": "Offensive Foul",
+	"description": "An offensive foul is called when a defensive player has a position on the court and an offensive player illegally moves them out of position. An offensive foul does not count as a team foul.",
+	"gif": "/static/GIFs/OffensiveFoul.gif"
+},
+{
+	"id": 6,
+	"call": "3 Point Attempt",
+	"description": "This signal is shown when a player has both feet behind the line and takes a shot.",
+	"gif": "/static/GIFs/3PtAttempt.gif"
+},
+{
+	"id": 7,
+	"call": "3 Point Basket Made",
+	"description": "This signal succeeds the 3 Point Attempt signal and illustrates that the ball went in the hoop.",
+	"gif": "/static/GIFs/3PBasket.gif"
+},
+{
+	"id": 8,
+	"call": "Jump Ball",
+	"description": "A Jump Ball is called when two players of opposite teams grab the basketball at the same time and have equal possession over the basketball. The ball is thrown up at the circle nearest to the play.",
+	"gif": "/static/GIFs/JumpBall.gif"
+},
+{
+	"id": 9,
+	"call": "Over and Back",
+	"description": "An Over and Back call is made when an offensive player moves the ball into the frontcourt (i.e., the half closer to the basket they are trying to score on) and then, without the opponent touching the ball (i.e., a deflection), the offensive team allows the ball to enter the backcourt and attempts to repossess the basketball.",
+	"gif": "/static/GIFs/OverandBack.gif"
+}
+]

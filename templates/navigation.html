@@ -1,0 +1,240 @@
+<html>
+	<head>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<title>Calls Index</title>
+		<style>
+			body {
+			  	font-family: 'Source Sans Pro', sans-serif;
+			}
+
+			h1 {
+				padding-top: 20px;
+				font-family: 'Libre Baskerville', serif;
+				color: grey;
+				font-size: 35px;
+			}
+
+			section {
+				display: inline-block;
+			}
+
+			.rating {
+				color: grey;
+				font-style: italic;
+			}
+
+			.name {
+				font-weight: bolder;
+			}
+
+			.warning {
+				color: red;
+				font-weight: bold;
+			}
+
+			.row {
+				padding-bottom: 20px;
+			}
+			section {
+				display: inline-block;
+				padding-top: 30px;
+			}
+
+			img {
+				width: 100%;
+			}
+
+			.bold {
+				font-weight: bolder
+			}
+
+			.field {
+				padding-bottom: 10px;
+			}
+
+			#player_description {
+				width: 75%;
+				text-align: justify;
+			}
+
+			#null_player {
+				color: red;
+				font-weight: bold;
+				text-align: center;
+			}
+
+			.index_section {
+				display: inline-block;
+			}
+
+			.rating {
+				color: grey;
+				font-style: italic;
+			}
+
+			.name {
+				font-weight: bolder;
+			}
+
+			.player_card_image {
+				height: 200px;
+				object-fit: cover;
+			}
+
+			.card{
+
+				text-align: center;
+			}
+
+			#add_team_btn {
+				margin-left: 20px;
+			}
+
+			.side_button {
+				margin-left: 24px;
+			}
+
+			.nav-wrapper {
+				text-align: center;
+				background-color: #191919;
+				text-decoration: none;
+				padding-top: 25px;
+				padding-bottom: 25px;
+			}
+
+			.nav-wrapper a {
+				color: grey;
+				font-size: 15px;
+				text-transform: uppercase;
+				text-decoration: underline;
+			}
+
+			#search_box {
+				margin-right: 0px;
+				margin-left: 30px;
+			}
+
+			#search_button {
+				margin-right: 30px;
+				margin-left: 0px;
+			}
+
+			#disclaimer {
+				font-style: italic;
+				text-align: center
+			}
+
+			.main {
+				text-align: center;
+				padding-top: 20px;
+				font-family: 'Libre Baskerville', serif;
+				color: grey;
+				font-size: 40px;
+			}
+
+			.main_desc {
+				text-align: center;
+				padding-top: 20px;
+				font-family: 'Libre Baskerville', serif;
+				color: grey;
+				font-size: 25px;
+			}
+
+			.type_desc {
+				padding-top: 20px;
+				font-family: 'Libre Baskerville', serif;
+				color: grey;
+				font-size: 25px;
+			}
+
+			#offensive_div {
+				margin-left: 30px;
+				display: block;
+			}
+
+			#foul_div {
+				margin-left: 30px;
+				display: block;
+			}
+
+			#misc_div {
+				margin-left: 30px;
+				display: block;
+			}
+
+
+			#desc_div {
+				margin: 0 auto;
+				max-width: 1000px;
+				display: block;
+			}
+
+			#results {
+				text-align: center;
+			}
+
+			#edit_description {
+				margin-bottom: 20px;
+			}
+
+			#description_box_edit {
+				width: 650px;
+				height: 100px;
+				word-break: break-word;
+			}
+
+			.spacing {
+				margin-right: 10px;
+			}
+
+			.spacing_left {
+				margin-left: 20px;
+				margin-bottom: 20px;
+			}
+
+		</style>
+	</head>
+	<body>
+		<div class="nav-wrapper">
+			<nav>
+				<a href="/" class="nav-wrapper">Home</a>
+				<input type="text" placeholder="Search calls" id="search_box">
+				<button id="search_button">Search</button>
+				<a href="/quiz" class="nav-wrapper">Quiz</a>
+			</nav>
+  		</div>
+		<h1 id="main_title"></h1>
+		<div id="desc_div"><h2 id="main_description"></h2></div>
+		<br>
+		<div id="offensive_div"><h2 id="offensive_violations"></h2></div>
+		<div class="container-fluid" id="offensive_container">
+			<div class="row" id="off_row"></div>
+		</div>
+		<br>
+		<div id="foul_div"><h2 id="fouls"></h2></div>
+		<div class="container-fluid" id="foul_container">
+			<div class="row" id="foul_row"></div>
+		</div>
+		<br>
+		<div id="misc_div"><h2 id="misc"></h2></div>
+		<div class="container-fluid" id="misc_container">
+			<div class="row" id="misc_row"></div>
+		</div>
+	  	<div class="container-fluid">
+			<div id="disclaimer"></div>
+			<div id="results"></div>
+			<div class="row justify-content-center" id="nav_row"></div>
+		</div>
+		<!-- jQuery CDN -->
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
+		<!-- bootstrap cdn files -->
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="crossorigin="anonymous"></script>
+		<script src="{{ url_for('static', filename='navigation.js') }}"></script>
+		{% block content %}
+		{% endblock %}
+	</body>
+</html>

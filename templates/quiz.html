@@ -1,0 +1,36 @@
+{% extends "navigation.html" %}
+{% block content %}
+<div class="container-fluid" id="quiz_main">
+	<div class="row justify-content-center" id="quiz_row">
+	</div>
+	<div class="row justify-content-center" id="options_row">
+		<form id="quiz_form" action="/send_results">
+			<label for="multiple_a">
+				Which call is A?
+			</label>
+			<select id="multiple_a" name="multiple_a">
+			</select>
+			<br>
+			<br>
+			<label for="multiple_b">
+				Which call is B?
+			</label>
+			<select id="multiple_b" name="multiple_b">
+			</select>
+			<br>
+			<br>
+			<input type="submit">
+		</form>
+	</div>
+	<div class="row" id="answers_row">
+	</div>
+	<div class="row" id="missed_row">
+	</div>
+</div>
+<script>
+	const questions = JSON.parse('{{ questions|tojson }}')
+	console.log(questions)
+	const all_call_options = JSON.parse('{{ all_call_options|tojson }}')
+</script>
+<script src="{{ url_for('static', filename='quiz.js') }}"></script>
+{% endblock %}
