@@ -12,17 +12,17 @@ $(document).ready(function(){
 	let gif_quiz_button = $(document.createElement("a"))
 	gif_quiz_button.addClass("btn btn-primary special_button")
 	gif_quiz_button.html("GIF Quiz")
-	gif_quiz_button.attr("href", "/gif_quiz")
+	gif_quiz_button.attr("href", "/quiz/gif")
 
 	let call_quiz_button = $(document.createElement("a"))
 	call_quiz_button.addClass("btn btn-primary special_button")
 	call_quiz_button.html("Call Quiz")
-	call_quiz_button.attr("href", "/call_quiz")
+	call_quiz_button.attr("href", "/quiz/call")
 
 	let rules_quiz_button = $(document.createElement("a"))
 	rules_quiz_button.addClass("btn btn-primary special_button")
 	rules_quiz_button.html("Rules Quiz")
-	rules_quiz_button.attr("href", "/rules_quiz")
+	rules_quiz_button.attr("href", "/quiz/rules")
 	
 	$("#btn_row").append(gif_quiz_button);
 	$("#btn_row").append(call_quiz_button);

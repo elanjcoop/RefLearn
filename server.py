@@ -29,13 +29,6 @@ def call_index():
 
 # ------------------------------------------------
 
-@app.route('/quiz_index')
-
-def quiz_index():
-	return render_template('quiz_index.html')
-
-# ------------------------------------------------
-
 @app.route('/view/<id>', methods=['GET', 'POST'])
 
 def view(id=None):
@@ -68,162 +61,59 @@ def search():
 
 # --------------------------------------------------
 
-@app.route('/gif_quiz', methods=['GET'])
+total_questions = 5
+current_question = 0
+missed_calls = []
+correct_answers = 0
+total_options = 4
+correct_call_name = ""
+correct_option = 0
+
+@app.route('/quiz_index')
+
+def quiz_index():
+	global current_question, missed_calls, correct_answers
+	current_question = 0
+	missed_calls = []
+	correct_answers = 0
+	return render_template('quiz_index.html')
+
+# ------------------------------------------------
+
+@app.route('/quiz/gif', methods=['GET'])
 
 def gif_quiz():
-	questions = random.sample(calls, 2)
-	all_call_options = []
-	question_calls = []
-
-	for question in questions:
-		question_calls.append(question["call"])
-
-	for call in calls:
-		if call["call"] in question_calls:
-			pass
-		else:
-			all_call_options.append(call["call"])
-
-	random.shuffle(all_call_options)
-
-	call_options_a = [all_call_options[0], all_call_options[1], all_call_options[2], questions[0]["call"]]
-	random.shuffle(call_options_a)
-	call_options_b = [all_call_options[3], all_call_options[4], all_call_options[5], questions[1]["call"]]
-	random.shuffle(call_options_b)
-
-	print(questions)
-
-	return render_template('gif_quiz.html', questions=questions, call_options_a=call_options_a, call_options_b=call_options_b)
+	global current_question, correct_call_name, correct_option
+	current_question += 1
+	options = random.sample(calls, total_options)
+	correct_option = random.randint(0, total_options - 1)
+	correct_call_gif = options[correct_option]["gif"]
+	correct_call_name = options[correct_option]["call"]
+	return render_template('quiz/gif.html', options=options, correct_call=correct_call_gif, current_question=current_question, total_questions=total_questions)
 
 # --------------------------------------------------
 
-@app.route('/send_results_gif', methods=['POST'])
+@app.route('/submit_gif', methods=['POST'])
 
-def send_results_gif():
-	form_answers = request.get_json()
-	missed_calls = []
-	answers_correct = 0
-
-	if form_answers["ans_a"] == form_answers["selected_a"]:
-		answers_correct += 1
+def submit_gif():
+	global correct_answers
+	answer = request.get_json()
+	if correct_option == int(answer):
+		correct_answers += 1
 	else:
-		missed_calls.append(form_answers["ans_a"])
-	if form_answers["ans_b"] == form_answers["selected_b"]:
-		answers_correct += 1
+		for call in calls:
+			if call["call"] == correct_call_name:
+				missed_call_id = call["id"]
+				missed_calls.append(tuple([missed_call_id, correct_call_name]))
+
+	if current_question == total_questions:
+		return jsonify(done=True)
 	else:
-		missed_calls.append(form_answers["ans_b"])
-
-	missed_ids = []
-	for call in calls:
-		if call["call"] in missed_calls:
-			missed_ids.append(call["id"])
-
-	return jsonify(answers_correct=answers_correct, missed_ids=missed_ids)
+		return jsonify(done=False)
 
 # --------------------------------------------------
 
-@app.route('/call_quiz', methods=['GET'])
+@app.route('/final_score_gif', methods=['GET'])
 
-def call_quiz():
-	questions = random.sample(calls, 2)
-	all_call_options = []
-	question_calls = []
-
-	for question in questions:
-		question_calls.append(question["call"])
-
-	for call in calls:
-		if call["gif"] in question_calls:
-			pass
-		else:
-			all_call_options.append(call["gif"])
-
-	random.shuffle(all_call_options)
-
-	call_options_a = [all_call_options[0], all_call_options[1], all_call_options[2], questions[0]["gif"]]
-	random.shuffle(call_options_a)
-	call_options_b = [all_call_options[3], all_call_options[4], all_call_options[5], questions[1]["gif"]]
-	random.shuffle(call_options_b)
-
-	print(questions)
-
-	return render_template('call_quiz.html', questions=questions, call_options_a=call_options_a, call_options_b=call_options_b)
-
-# --------------------------------------------------
-
-@app.route('/send_results_call', methods=['POST'])
-
-def send_results_call():
-	form_answers = request.get_json()
-	missed_calls = []
-	answers_correct = 0
-
-	if form_answers["ans_a"] == form_answers["selected_a"]:
-		answers_correct += 1
-	else:
-		missed_calls.append(form_answers["ans_a"])
-	if form_answers["ans_b"] == form_answers["selected_b"]:
-		answers_correct += 1
-	else:
-		missed_calls.append(form_answers["ans_b"])
-
-	missed_ids = []
-	for call in calls:
-		if call["gif"] in missed_calls:
-			missed_ids.append(call["id"])
-
-	return jsonify(answers_correct=answers_correct, missed_ids=missed_ids)
-
-# --------------------------------------------------
-
-@app.route('/rules_quiz', methods=['GET'])
-
-def rules_quiz():
-	questions = random.sample(calls, 2)
-	all_call_options = []
-	question_calls = []
-
-	for question in questions:
-		question_calls.append(question["call"])
-
-	for call in calls:
-		if call["call"] in question_calls:
-			pass
-		else:
-			all_call_options.append(call["call"])
-
-	random.shuffle(all_call_options)
-
-	call_options_a = [all_call_options[0], all_call_options[1], all_call_options[2], questions[0]["call"]]
-	random.shuffle(call_options_a)
-	call_options_b = [all_call_options[3], all_call_options[4], all_call_options[5], questions[1]["call"]]
-	random.shuffle(call_options_b)
-
-	print(questions)
-
-	return render_template('rules_quiz.html', questions=questions, call_options_a=call_options_a, call_options_b=call_options_b)
-
-# --------------------------------------------------
-
-@app.route('/send_results_rules', methods=['POST'])
-
-def send_results_rules():
-	form_answers = request.get_json()
-	missed_calls = []
-	answers_correct = 0
-
-	if form_answers["ans_a"] == form_answers["selected_a"]:
-		answers_correct += 1
-	else:
-		missed_calls.append(form_answers["ans_a"])
-	if form_answers["ans_b"] == form_answers["selected_b"]:
-		answers_correct += 1
-	else:
-		missed_calls.append(form_answers["ans_b"])
-
-	missed_ids = []
-	for call in calls:
-		if call["call"] in missed_calls:
-			missed_ids.append(call["id"])
-
-	return jsonify(answers_correct=answers_correct, missed_ids=missed_ids)
+def final_score_gif():
+	return render_template('final_score.html', correct_answers=correct_answers, total_questions=total_questions, missed_calls=missed_calls)

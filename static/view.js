@@ -2,16 +2,16 @@ $(document).ready(function(){
 
 	//console.log(Object.keys(player).length)
 	if (Object.keys(call).length == 0) {
-		let null_player = $("#null_player")
-		null_player.html("Sorry, there is no player under this id.")
+		let null_call = $("#null_call")
+		null_call.html("Sorry, there is no call under this ID.")
 	} else {
-		show_player()
+		show_call()
 	}
 
-	function show_player() {
-		let call_name = $("#player_name")
-		let call_description = $("#player_description")
-		let call_image = $("#player_image")
+	function show_call() {
+		let call_name = $("#call_name")
+		let call_description = $("#call_description")
+		let call_image = $("#call_image")
 		call_image.attr("src", call["gif"])
 		//player_image.attr("alt", player["alt"])
 		call_name.append(`<span class="bold">Name: </span><br>`)
@@ -24,12 +24,12 @@ $(document).ready(function(){
 	let search_button = $("#search_button")
 	let search_box = $("#search_box")
 	search_button.on("click", (f) => {
-		$("#player_view").empty()
+		$("#call_view").empty()
 	});
 
 	search_box.on("keypress", (f) => {
 		if (f.which == 13) {
-				$("#player_view").empty()
+				$("#call_view").empty()
 			}
 	});
 

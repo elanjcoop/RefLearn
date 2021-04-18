@@ -1,0 +1,17 @@
+{% extends "navigation.html" %}
+{% block content %}
+<div class="container-fluid">
+	<div class="row justify-content-center">
+		<div class="final_score"></div>
+	</div>
+	<div class="row justify-content-center">
+		<div id="missed_calls"></div>
+	</div>
+</div>
+<script>
+	const correct_answers = JSON.parse('{{ correct_answers|tojson }}')
+	const total_questions = JSON.parse('{{ total_questions|tojson }}')
+	const missed_calls = JSON.parse('{{ missed_calls|tojson }}')
+</script>
+<script src="{{ url_for('static', filename='final_score.js') }}"></script>
+{% endblock %}
