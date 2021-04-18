@@ -1,5 +1,12 @@
 $(document).ready(function(){
 
+	$(".quiz-item").addClass("active");
+	$(".home-item").removeClass("active");
+
+	$("#search_button").addClass("disabled");
+	$("#search_box").attr('disabled', 'disabled');
+	$("#search_button").attr('disabled', 'disabled');
+
 	delete_cards()
 	display_custom()
 	display_options()
@@ -28,22 +35,19 @@ $(document).ready(function(){
 	}
 
 	function display_options() {
-		var duplicate_options = all_call_options;
-		shuffle(duplicate_options)
 
-
-		var multiple_a_option_a = $("<option></option>").attr("value", "question_a_option_a").text(duplicate_options[0]);
-		var multiple_a_option_b = $("<option></option>").attr("value", "question_a_option_b").text(questions[0]["call"]);
-		var multiple_a_option_c = $("<option></option>").attr("value", "question_a_option_c").text(duplicate_options[1]);
-		var multiple_a_option_d = $("<option></option>").attr("value", "question_a_option_d").text(duplicate_options[2]);
+		var multiple_a_option_a = $("<option></option>").attr("value", "question_a_option_a").text(call_options_a[0]);
+		var multiple_a_option_b = $("<option></option>").attr("value", "question_a_option_b").text(call_options_a[1]);
+		var multiple_a_option_c = $("<option></option>").attr("value", "question_a_option_c").text(call_options_a[2]);
+		var multiple_a_option_d = $("<option></option>").attr("value", "question_a_option_d").text(call_options_a[3]);
 		$("#multiple_a").append(multiple_a_option_a)
 		$("#multiple_a").append(multiple_a_option_b)
 		$("#multiple_a").append(multiple_a_option_c)
 		$("#multiple_a").append(multiple_a_option_d)
-		var multiple_b_option_a = $("<option></option>").attr("value", "question_b_option_a").text(duplicate_options[3]);
-		var multiple_b_option_b = $("<option></option>").attr("value", "question_b_option_b").text(duplicate_options[4]);
-		var multiple_b_option_c = $("<option></option>").attr("value", "question_b_option_c").text(duplicate_options[5]);
-		var multiple_b_option_d = $("<option></option>").attr("value", "question_b_option_d").text(questions[1]["call"]);
+		var multiple_b_option_a = $("<option></option>").attr("value", "question_b_option_a").text(call_options_b[0]);
+		var multiple_b_option_b = $("<option></option>").attr("value", "question_b_option_b").text(call_options_b[1]);
+		var multiple_b_option_c = $("<option></option>").attr("value", "question_b_option_c").text(call_options_b[2]);
+		var multiple_b_option_d = $("<option></option>").attr("value", "question_b_option_d").text(call_options_b[3]);
 		$("#multiple_b").append(multiple_b_option_a)
 		$("#multiple_b").append(multiple_b_option_b)
 		$("#multiple_b").append(multiple_b_option_c)
@@ -54,25 +58,7 @@ $(document).ready(function(){
 		$("#nav_row").html("")
 	}
 
-	//Fisher-Yates shuffle
-	function shuffle(array) {
-		var currentIndex = array.length, temporaryValue, randomIndex;
-
-		// While there remain elements to shuffle...
-		while (0 !== currentIndex) {
-			// Pick a remaining element...
-			randomIndex = Math.floor(Math.random() * currentIndex);
-			currentIndex -= 1;
-
-			// And swap it with the current element.
-			temporaryValue = array[currentIndex];
-			array[currentIndex] = array[randomIndex];
-			array[randomIndex] = temporaryValue;
-		}
-
-		return array;
-	}
-
+	
 	$("#quiz_form").submit(function(e) {
 
 		e.preventDefault();

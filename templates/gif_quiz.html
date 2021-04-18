@@ -1,0 +1,39 @@
+{% extends "navigation.html" %}
+{% block content %}
+<div class="container-fluid" id="quiz_main">
+	<div class="row justify-content-center" id="quiz_row">
+	</div>
+	<div class="row justify-content-center" id="options_row">
+		<form id="quiz_form" action="/send_results_gif">
+			<label for="multiple_a">
+				Which call is A?
+			</label>
+			<select id="multiple_a" name="multiple_a">
+			</select>
+			<br>
+			<br>
+			<label for="multiple_b">
+				Which call is B?
+			</label>
+			<select id="multiple_b" name="multiple_b">
+			</select>
+			<br>
+			<br>
+			<input type="submit">
+		</form>
+	</div>
+	<div class="row" id="answers_row">
+	</div>
+	<div class="row" id="missed_row">
+	</div>
+</div>
+<script>
+	const questions = JSON.parse('{{ questions|tojson }}')
+	console.log(questions)
+	const call_options_a = JSON.parse('{{ call_options_a|tojson }}')
+	const call_options_b = JSON.parse('{{ call_options_b|tojson }}')
+	console.log(call_options_a)
+	console.log(call_options_b)
+</script>
+<script src="{{ url_for('static', filename='gif_quiz.js') }}"></script>
+{% endblock %}

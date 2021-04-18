@@ -4,7 +4,7 @@
 	<div class="row justify-content-center" id="quiz_row">
 	</div>
 	<div class="row justify-content-center" id="options_row">
-		<form id="quiz_form" action="/send_results">
+		<form id="quiz_form" action="/send_results_rules">
 			<label for="multiple_a">
 				Which call is A?
 			</label>
@@ -30,7 +30,10 @@
 <script>
 	const questions = JSON.parse('{{ questions|tojson }}')
 	console.log(questions)
-	const all_call_options = JSON.parse('{{ all_call_options|tojson }}')
+	const call_options_a = JSON.parse('{{ call_options_a|tojson }}')
+	const call_options_b = JSON.parse('{{ call_options_b|tojson }}')
+	console.log(call_options_a)
+	console.log(call_options_b)
 </script>
-<script src="{{ url_for('static', filename='quiz.js') }}"></script>
+<script src="{{ url_for('static', filename='rules_quiz.js') }}"></script>
 {% endblock %}

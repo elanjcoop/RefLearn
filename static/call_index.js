@@ -1,13 +1,10 @@
 $(document).ready(function(){
+	$(".explore-item").addClass("active");
+	$(".home-item").removeClass("active");
 
+	
 	display_all();
 
-	let main_title = $("#main_title")
-	main_title.toggleClass("main")
-	main_title.html("Welcome to RefLearn!")
-	let main_description = $("#main_description")
-	main_description.toggleClass("main_desc")
-	main_description.html("RefLearn is a site for learning about how to signal the correct call on the basketball court. RefLearn focuses on non-NBA level, recreational basketball, and keep in mind that rules change based on the different levels of basketball being played. Thank you for visiting; you’ll be sure to learn a ton!")
 	let offensive_violations = $("#offensive_violations")
 	offensive_violations.toggleClass("type_desc")
 	offensive_violations.html("Offensive Violations")

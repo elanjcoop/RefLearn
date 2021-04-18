@@ -1,0 +1,23 @@
+{% extends "navigation.html" %}
+{% block content %}
+<div id="offensive_div">
+	<h2 id="offensive_violations"></h2>
+</div>
+<div class="container-fluid" id="offensive_container">
+		<div class="row" id="off_row"></div>
+</div>
+<br>
+<div id="foul_div"><h2 id="fouls"></h2></div>
+<div class="container-fluid" id="foul_container">
+	<div class="row" id="foul_row"></div>
+</div>
+<br>
+<div id="misc_div"><h2 id="misc"></h2></div>
+<div class="container-fluid" id="misc_container">
+	<div class="row" id="misc_row"></div>
+</div>
+<script>
+	const calls = JSON.parse('{{ calls|tojson }}')
+</script>
+<script src="{{ url_for('static', filename='call_index.js') }}"></script>
+{% endblock %}

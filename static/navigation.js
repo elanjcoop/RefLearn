@@ -4,7 +4,9 @@ $(document).ready(function(){
 	let search_button = $("#search_button")
 
 	search_button.on("click", (f) => {
-		display_matches()
+		if (!search_button.hasClass("disabled")) {
+			display_matches()
+		}
 	});
 
 	search_box.on("keypress", (f) => {
@@ -14,9 +16,16 @@ $(document).ready(function(){
 	});
 
 
-	function delete_cards() {
+	function delete_all() {
 		$(".row").html("")
-
+		$("#main_title").html("")
+		$("#main_description").html("")
+		$("#offensive_div").html("")
+		$("#foul_div").html("")
+		$("#misc_div").html("")
+		$(".bg-img").remove()
+		$(".card_wrapper").remove()
+		$("#current").remove()
 	}
 
 	function display_custom(matches, results) {
@@ -70,7 +79,7 @@ $(document).ready(function(){
 				let matches = result["matches"]
 				console.log(matches)
 		    	console.log("Results: " + result["matches"].length)
-				delete_cards();
+				delete_all();
 				display_custom(matches, results)
 				search_box.val("")
 		    },
