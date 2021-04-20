@@ -98,11 +98,46 @@ def gif_quiz():
 			break
 	return render_template('quiz/gif.html', options=options, correct_call=correct_call_gif, current_question=current_question, total_questions=total_questions)
 
+# ------------------------------------------------
+
+@app.route('/quiz/rules', methods=['GET'])
+
+def rules_quiz():
+	global current_question, correct_call_name, correct_option
+	current_question += 1
+	options = random.sample(calls, total_options)
+	while True:
+		correct_option = random.randint(0, total_options - 1)
+		correct_call_rules = options[correct_option]["quiz_description"]
+		correct_call_name = options[correct_option]["call"]
+		correct_call_id = options[correct_option]["id"]
+		if correct_call_id not in already_asked:
+			already_asked.append(correct_call_id)
+			break
+	return render_template('quiz/rules.html', options=options, correct_call=correct_call_rules, current_question=current_question, total_questions=total_questions)
+
+	# ------------------------------------------------
+
+@app.route('/quiz/call', methods=['GET'])
+
+def call_quiz():
+	global current_question, correct_call_name, correct_option
+	current_question += 1
+	options = random.sample(calls, total_options)
+	while True:
+		correct_option = random.randint(0, total_options - 1)
+		correct_call_rules = options[correct_option]["quiz_description"]
+		correct_call_name = options[correct_option]["call"]
+		correct_call_id = options[correct_option]["id"]
+		if correct_call_id not in already_asked:
+			already_asked.append(correct_call_id)
+			break
+	return render_template('quiz/call.html', options=options, correct_call=correct_call_name, current_question=current_question, total_questions=total_questions)
 # --------------------------------------------------
 
-@app.route('/submit_gif', methods=['POST'])
+@app.route('/submit', methods=['POST'])
 
-def submit_gif():
+def submit():
 	global correct_answers
 	answer = request.get_json()
 	if correct_option == int(answer):

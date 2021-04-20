@@ -37,7 +37,7 @@ $(document).ready(function(){
 
 		$.ajax({
 			type: 'POST',
-			url: '/submit_gif',
+			url: '/submit',
 			data: JSON.stringify(i),
 			dataType: 'json',
 			contentType: 'application/json; charset=utf-8',
@@ -63,7 +63,7 @@ $(document).ready(function(){
 			$(`button[id=${chosen_choice}]`).addClass("btn-danger")
 		}
 		window.setTimeout(function(){ if (done) {
-			window.location.href = '/final_score_gif'
+			window.location.href = '/final_score'
 		} else {
 			window.location.href = '/quiz/gif'
 		}}, 2000)

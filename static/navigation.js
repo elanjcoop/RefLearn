@@ -26,6 +26,9 @@ $(document).ready(function(){
 		$(".bg-img").remove()
 		$(".card_wrapper").remove()
 		$("#current").remove()
+		$("#desc_div").remove()
+		$("#scroll_horizontally").remove()
+
 	}
 
 	function display_custom(matches, results) {

@@ -8,144 +8,78 @@ $(document).ready(function(){
 	$("#search_button").attr('disabled', 'disabled');
 
 	delete_cards()
-	display_custom()
-	display_options()
+
+	$("#question_number").html(`<h1>` + "Question " + current_question + " / " + total_questions + `</h1>`)
+
+	let call = $(document.createElement("h1"))
+	call.addClass("question_call")
+	call.html(correct_call)
+	$("#question_call").append(call)
+
+	for (var i = 0; i < options.length; i++) {
+		let button = $(document.createElement("button"))
+		if (i == 0) {
+			button.html("A")
+		} else if (i == 1) {
+			button.html("B")
+		} else if (i == 2) {
+			button.html("C")
+		} else {
+			button.html("D")
+		}
+		button.addClass("btn btn-primary special_button")
+		button.attr("id", i)
+		button.on("click", (e) => {
+			submit(button.attr("id"))
+		})
+		$("#options_row").append(button)
+
+		let gif = $(document.createElement("img"))
+		gif.addClass("gif_option")
+		gif.attr("src", options[i]["gif"])
+		$("#question_gif_row").append(gif)
+	}
 	
-	function display_custom() {
 
-		for (var i = 0; i < questions.length; i++) {
-			let section = $(document.createElement("section"))
-			let card = $(document.createElement("div"))
-			let card_body = $(document.createElement("div"))
-			section.addClass("col-xl-2")
-			section.addClass("index_section")
-			card.addClass("card")
-			card.addClass("h-100")
-			card_body.addClass("card-body")
-			card_body.html("Question " + (i + 1) + ": " + "Which GIF is " + questions[i]["call"])
-			card.append(card_body)
-			section.append(card)
-			$("#quiz_row").append(section)
-		}
-
-
-		for (var i = 0; i < call_options_a.length; i++) {
-			let section = $(document.createElement("section"))
-			let card = $(document.createElement("div"))
-			let card_body = $(document.createElement("div"))
-			section.addClass("col-xl-2")
-			section.addClass("index_section")
-			card.addClass("card")
-			card.addClass("h-100")
-			card_body.addClass("card-body")
-			let img = $(document.createElement("img"))
-			img.attr("src", call_options_a[i])
-			//img.attr("alt", questions[i]["alt"])
-			img.addClass("call_card_image")
-			card.append(img)
-			card.append(card_body)
-			section.append(card)
-			$("#gif_row_a").append(section)
-		}
-
-		for (var i = 0; i < call_options_b.length; i++) {
-			let section = $(document.createElement("section"))
-			let card = $(document.createElement("div"))
-			let card_body = $(document.createElement("div"))
-			section.addClass("col-xl-2")
-			section.addClass("index_section")
-			card.addClass("card")
-			card.addClass("h-100")
-			card_body.addClass("card-body")
-			let img = $(document.createElement("img"))
-			img.attr("src", call_options_b[i])
-			//img.attr("alt", questions[i]["alt"])
-			img.addClass("call_card_image")
-			card.append(img)
-			card.append(card_body)
-			section.append(card)
-			$("#gif_row_b").append(section)
-		}
-
-
-	}
-
-	function display_options() {
-		/*var multiple_a_option_a = $("<option></option>").attr("value", "question_a_option_a").attr("data-img-src", call_options_a[0]);
-		var multiple_a_option_b = $("<option></option>").attr("value", "question_a_option_b").text(call_options_a[1]);
-		var multiple_a_option_c = $("<option></option>").attr("value", "question_a_option_c").text(call_options_a[2]);
-		var multiple_a_option_d = $("<option></option>").attr("value", "question_a_option_d").text(call_options_a[3]);
-*/
-		var multiple_a_option_a = $("<option></option>").attr("value", "question_a_option_a").attr("data-img-src", call_options_a[0]).text("GIF A");
-		var multiple_a_option_b = $("<option></option>").attr("value", "question_a_option_b").attr("data-img-src", call_options_a[1]).text("GIF B");
-		var multiple_a_option_c = $("<option></option>").attr("value", "question_a_option_c").attr("data-img-src", call_options_a[2]).text("GIF C");
-		var multiple_a_option_d = $("<option></option>").attr("value", "question_a_option_d").attr("data-img-src", call_options_a[3]).text("GIF D");
-		$("#multiple_a").append(multiple_a_option_a)
-		$("#multiple_a").append(multiple_a_option_b)
-		$("#multiple_a").append(multiple_a_option_c)
-		$("#multiple_a").append(multiple_a_option_d)
-		var multiple_b_option_a = $("<option></option>").attr("value", "question_b_option_a").attr("data-img-src", call_options_b[0]).text("GIF A");
-		var multiple_b_option_b = $("<option></option>").attr("value", "question_b_option_b").attr("data-img-src", call_options_b[1]).text("GIF B");
-		var multiple_b_option_c = $("<option></option>").attr("value", "question_b_option_c").attr("data-img-src", call_options_b[2]).text("GIF C");
-		var multiple_b_option_d = $("<option></option>").attr("value", "question_b_option_d").attr("data-img-src", call_options_b[3]).text("GIF D");
-		$("#multiple_b").append(multiple_b_option_a)
-		$("#multiple_b").append(multiple_b_option_b)
-		$("#multiple_b").append(multiple_b_option_c)
-		$("#multiple_b").append(multiple_b_option_d)
-	}
 
 	function delete_cards() {
 		$("#nav_row").html("")
 	}
 
-	
-	$("#quiz_form").submit(function(e) {
+	function submit(i) {
 
-		e.preventDefault();
-		var form = $(this);
-		var url = form.attr('action');
-
-		form_answers = {
-			"ans_a": questions[0]["gif"],
-			"ans_b": questions[1]["gif"],
-			"selected_a": $("#multiple_a option:selected").attr('data-img-src'),
-			"selected_b":  $("#multiple_b option:selected").attr('data-img-src')
-		}
-
-
-		
 		$.ajax({
-        	type: "POST",
-        	url: url,
-        	data: JSON.stringify(form_answers),
-        	dataType: 'json',
+			type: 'POST',
+			url: '/submit',
+			data: JSON.stringify(i),
+			dataType: 'json',
 			contentType: 'application/json; charset=utf-8',
-    		success: function(result) {
-    			$("#missed_row").html("")
-    			console.log(result)
-    			for (var i = 0; i < result["missed_ids"].length; i++) {
-    			$("#answers_row").html("Score: " + result["answers_correct"])
-    				//$("#missed_row").append(result["missed_ids"][i])
-    				var a = $(document.createElement("a"))
-    				a.attr("href", "/view/" + result["missed_ids"][i])
-    				a.html(result["missed_ids"][i])
-    				$("#missed_row").append(a)
-    			}
-
-    			if (result["missed_ids"].length == 0) {
-    				$("#missed_row").html("Nice Job! Perfect Score!")
-    			}
-    			
-    		},
-    		error: function(request, status, error) {
+			success: function(result) {
+				show_feedback(result["correct_option"], i, result["done"])
+			},
+			error: function(request, status, error) {
 		    	console.log('Error');
 		      	console.log(request);
 		    	console.log(status);
 		    	console.log(error);
 			}
-		});
-         
+		})
+	}
 
-	})
+	function show_feedback(correct_choice, chosen_choice, done) {
+		$("button").attr('disabled', 'disabled');
+		var correct_string = correct_choice.toString();
+		if (correct_string == chosen_choice) {
+			$(`button[id=${correct_choice}]`).addClass("btn-success")
+		} else {
+			$(`button[id=${correct_choice}]`).addClass("btn-success")
+			$(`button[id=${chosen_choice}]`).addClass("btn-danger")
+		}
+		window.setTimeout(function(){ if (done) {
+			window.location.href = '/final_score'
+		} else {
+			window.location.href = '/quiz/call'
+		}}, 2000)
+	}
 
 });
