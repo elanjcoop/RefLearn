@@ -61,18 +61,20 @@ def search():
 
 # --------------------------------------------------
 
-total_questions = 5
+total_questions = 4
 current_question = 0
 missed_calls = []
 correct_answers = 0
 total_options = 4
 correct_call_name = ""
 correct_option = 0
+already_asked = []
 
 @app.route('/quiz_index')
 
 def quiz_index():
 	global current_question, missed_calls, correct_answers
+	already_asked = []
 	current_question = 0
 	missed_calls = []
 	correct_answers = 0
@@ -86,9 +88,14 @@ def gif_quiz():
 	global current_question, correct_call_name, correct_option
 	current_question += 1
 	options = random.sample(calls, total_options)
-	correct_option = random.randint(0, total_options - 1)
-	correct_call_gif = options[correct_option]["gif"]
-	correct_call_name = options[correct_option]["call"]
+	while True:
+		correct_option = random.randint(0, total_options - 1)
+		correct_call_gif = options[correct_option]["gif"]
+		correct_call_name = options[correct_option]["call"]
+		correct_call_id = options[correct_option]["id"]
+		if correct_call_id not in already_asked:
+			already_asked.append(correct_call_id)
+			break
 	return render_template('quiz/gif.html', options=options, correct_call=correct_call_gif, current_question=current_question, total_questions=total_questions)
 
 # --------------------------------------------------
@@ -107,9 +114,9 @@ def submit_gif():
 				missed_calls.append(tuple([missed_call_id, correct_call_name]))
 
 	if current_question == total_questions:
-		return jsonify(done=True)
+		return jsonify(done=True, correct_option=correct_option)
 	else:
-		return jsonify(done=False)
+		return jsonify(done=False, correct_option=correct_option)
 
 # --------------------------------------------------
 

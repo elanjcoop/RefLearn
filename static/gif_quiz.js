@@ -34,7 +34,6 @@ $(document).ready(function(){
 	}
 
 	function submit(i) {
-		console.log(i)
 
 		$.ajax({
 			type: 'POST',
@@ -43,11 +42,7 @@ $(document).ready(function(){
 			dataType: 'json',
 			contentType: 'application/json; charset=utf-8',
 			success: function(result) {
-				if (result["done"]) {
-					window.location.href = '/final_score_gif'
-				} else {
-				window.location.href = '/quiz/gif'
-				}
+				show_feedback(result["correct_option"], i, result["done"])
 			},
 			error: function(request, status, error) {
 		    	console.log('Error');
@@ -56,6 +51,22 @@ $(document).ready(function(){
 		    	console.log(error);
 			}
 		})
+	}
+
+	function show_feedback(correct_choice, chosen_choice, done) {
+		$("button").attr('disabled', 'disabled');
+		var correct_string = correct_choice.toString();
+		if (correct_string == chosen_choice) {
+			$(`button[id=${correct_choice}]`).addClass("btn-success")
+		} else {
+			$(`button[id=${correct_choice}]`).addClass("btn-success")
+			$(`button[id=${chosen_choice}]`).addClass("btn-danger")
+		}
+		window.setTimeout(function(){ if (done) {
+			window.location.href = '/final_score_gif'
+		} else {
+			window.location.href = '/quiz/gif'
+		}}, 2000)
 	}
 
 });

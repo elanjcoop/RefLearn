@@ -12,6 +12,7 @@
 <script>
 	const options = JSON.parse('{{ options|tojson }}')
 	const correct_call = JSON.parse('{{ correct_call|tojson }}')
+	console.log(correct_call)
 	const current_question = JSON.parse('{{ current_question|tojson }}')
 	const total_questions = JSON.parse('{{ total_questions|tojson }}')
 </script>

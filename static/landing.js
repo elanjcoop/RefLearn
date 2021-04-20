@@ -4,11 +4,19 @@ $(document).ready(function(){
 	
 	let main_title = $("#main_title")
 	main_title.toggleClass("main")
-	main_title.html("Welcome to RefLearn!")
-	let main_description = $("#main_description")
+	main_title.html("RefLearn")
+	let main_description = $("#description_a")
 	main_description.toggleClass("main_desc")
-	main_description.html("RefLearn is a site for learning about how to signal the correct call on the basketball court. RefLearn focuses on non-NBA level, recreational basketball, and keep in mind that rules change based on the different levels of basketball being played. Thank you for visiting; you’ll be sure to learn a ton!")
-
+	main_description.html("RefLearn is a site for learning about how to signal the correct call on the basketball court.")
+	let desc_b = $("#description_b")
+	desc_b.toggleClass("main_b")
+	desc_b.html("RefLearn focuses on non-NBA level, recreational basketball, and keep in mind that rules change based on the different levels of basketball being played.")
+	let desc_c = $("#description_c")
+	desc_c.toggleClass("main_c")
+	desc_c.html("Thank you for visiting; you’ll be sure to learn a ton!")
+	let desc_d = $("#description_d")
+	desc_d.toggleClass("main_d")
+	desc_d.html("Scroll down to find all the calls in basketball.")
 
 	for (var i = 0; i < calls.length; i++) {
 		let card = $(document.createElement("div"))
@@ -23,9 +31,14 @@ $(document).ready(function(){
 		$(".card_wrapper").append(card)
 	}
 
+
+
+	/*
+	The scroll animation effects were converted and inspired by Mert Cukuren,
+	link:
+	https://codepen.io/knyttneve/pen/EGyQqN
+	*/
 	const cards = document.querySelectorAll(".call_card");
-
-
 	function isElementInViewport(el) {
 		const rect = el.getBoundingClientRect()
 		return (
@@ -49,10 +62,6 @@ $(document).ready(function(){
 	window.addEventListener("scroll", isCardVisible);
 	window.addEventListener("resize", isCardVisible);
 	document.getElementById("card_wrapper").addEventListener("scroll", isCardVisible);
-
-	var visibleY = function(el){
-  		
-};
 
 
 });

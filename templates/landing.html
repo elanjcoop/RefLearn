@@ -1,7 +1,8 @@
 {% extends "navigation.html" %}
 {% block content %}
 <div class="bg-img"></div>
-<h1 id="current">All Calls</h1>
+<h1 id="current">The Calls</h1>
+<div id="scroll_horizontally">Scroll horizontally to see all calls.</div>
 <div class="card_wrapper" id="card_wrapper"></div>
 <script>
 	const calls = JSON.parse('{{ calls|tojson }}')
