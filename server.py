@@ -120,7 +120,7 @@ def submit_gif():
 
 # --------------------------------------------------
 
-@app.route('/final_score_gif', methods=['GET'])
+@app.route('/final_score', methods=['GET'])
 
 def final_score_gif():
 	return render_template('final_score.html', correct_answers=correct_answers, total_questions=total_questions, missed_calls=missed_calls)
